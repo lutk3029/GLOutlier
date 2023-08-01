@@ -1,0 +1,1 @@
+srun -p dell --gres=gpu:1 python3.6 ./ATR/main.py  --anormly_ratio 0.5 --num_epochs 3    --batch_size 256  --mode train --dataset SWaT0.5  --data_path ./SWaT_local_0.5 --input_c 17    --output_c 17

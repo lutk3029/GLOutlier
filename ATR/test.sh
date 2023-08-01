@@ -1,0 +1,1 @@
+srun -p cpu python3.6 ./ATR/main.py --anormly_ratio 0.1  --num_epochs 10       --batch_size 256     --mode test    --dataset SWaT0.5   --data_path ./SWaT_local_0.5  --input_c 17    --output_c 17  --pretrained_model 10
