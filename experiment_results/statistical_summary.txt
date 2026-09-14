@@ -1,0 +1,8 @@
+datasets=48, methods=14
+friedman_chi_square=326.39052
+friedman_df=13
+friedman_p_value=7.0903181e-62
+rank_standard_error=0.85391256
+bonferroni_dunn_cd_alpha_0.05=2.46824
+ours_best_f1_dataset_count=43
+ours_f1_greater_than_at_dataset_count=47
