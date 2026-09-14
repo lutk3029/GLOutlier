@@ -108,6 +108,10 @@ def get_loader_segment(data_path, batch_size, win_size=100, step=100, mode='trai
         dataset = SWaTSegLoader(data_path, win_size, 1, mode)
     elif (dataset == 'WADI0.9'):
         dataset = SWaTSegLoader(data_path, win_size, 1, mode)
+    else:
+        # Dataset names supplied by run_timeeval.py use the same canonical
+        # train/test/test_label CSV layout.
+        dataset = SWaTSegLoader(data_path, win_size, 1, mode)
 
     shuffle = False
     if mode == 'train':
