@@ -288,8 +288,9 @@ class Solver(object):
 
         attens_energy = np.concatenate(attens_energy, axis=0).reshape(-1)
         test_energy = np.array(attens_energy)
-        combined_energy = np.concatenate([train_energy, test_energy], axis=0)
-        thresh = np.percentile(combined_energy, 100 - self.anormly_ratio)
+        # The paper's TimeEval protocol fixes the threshold from training
+        # scores only (99th percentile when anormly_ratio=1).
+        thresh = np.percentile(train_energy, 100 - self.anormly_ratio)
         print("Threshold :", thresh)
 
         # (3) evaluation on the test set
@@ -343,28 +344,7 @@ class Solver(object):
         print("pred:   ", pred.shape)
         print("gt:     ", gt.shape)
 
-        # detection adjustment
-        anomaly_state = False
-        for i in range(len(gt)):
-            if gt[i] == 1 and pred[i] == 1 and not anomaly_state:
-                anomaly_state = True
-                for j in range(i, 0, -1):
-                    if gt[j] == 0:
-                        break
-                    else:
-                        if pred[j] == 0:
-                            pred[j] = 1
-                for j in range(i, len(gt)):
-                    if gt[j] == 0:
-                        break
-                    else:
-                        if pred[j] == 0:
-                            pred[j] = 1
-            elif gt[i] == 0:
-                anomaly_state = False
-            if anomaly_state:
-                pred[i] = 1
-
+        # Point-wise evaluation: no label-dependent point adjustment.
         pred = np.array(pred)
         gt = np.array(gt)
         print("pred: ", pred.shape)
